@@ -617,9 +617,27 @@ function showToast(msg,dur){
 }
 
 // ═══ COUNTER — hits.sh ═══
+// async function initCounter(){
+//   try{
+//     var r=await fetch('https://hits.sh/riding-weather-india.json');
+//     if(!r.ok)throw new Error('fail');
+//     var d=await r.json();
+//     if(d&&typeof d.hits==='number'){
+//       var el=document.getElementById('rideCount');
+//       var wrap=document.getElementById('hdrCounter');
+//       if(el)el.textContent=d.hits.toLocaleString('en-IN');
+//       if(wrap)wrap.style.display='flex';
+//     }
+//   }catch(e){
+//     var wrap2=document.getElementById('hdrCounter');
+//     if(wrap2)wrap2.style.display='flex';
+//   }
+// }
+// initCounter();
+
 async function initCounter(){
   try{
-    var r=await fetch('https://hits.sh/riding-weather-india.json');
+    var r=await fetch('https://hits.sh/syedmudabbir25.github.io/Riding_Weather_Detector.json');
     if(!r.ok)throw new Error('fail');
     var d=await r.json();
     if(d&&typeof d.hits==='number'){
@@ -629,8 +647,10 @@ async function initCounter(){
       if(wrap)wrap.style.display='flex';
     }
   }catch(e){
-    var wrap2=document.getElementById('hdrCounter');
-    if(wrap2)wrap2.style.display='flex';
+    var el=document.getElementById('rideCount');
+    var wrap=document.getElementById('hdrCounter');
+    if(el)el.textContent='0';
+    if(wrap)wrap.style.display='flex';
   }
 }
 initCounter();
