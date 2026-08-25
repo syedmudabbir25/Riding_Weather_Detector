@@ -1250,8 +1250,13 @@ function interpRoute(geom,stepKm){
   if(pts[pts.length-1].coord!==end)pts.push({coord:end,km:Math.round(acc)});
   return{pts:pts,totalKm:Math.round(acc)};
 }
-function fmtTime(h,m){return String(h).padStart(2,'0')+':'+String(Math.round(m)%60).padStart(2,'0');}
-
+//function fmtTime(h,m){return String(h).padStart(2,'0')+':'+String(Math.round(m)%60).padStart(2,'0');}
+function fmtTime(h,m){
+  var totalMinutes=Math.round(h*60+m);
+  var hours=Math.floor(totalMinutes/60)%24;
+  var minutes=totalMinutes%60;
+  return String(hours).padStart(2,'0')+':'+String(minutes).padStart(2,'0');
+}
 // ═══ CHECK WEATHER ═══
 async function checkWeather(){
   if(selRouteIdx===null)return;
@@ -1283,7 +1288,11 @@ async function checkWeather(){
       var p=pts[i];
       var lon=p.coord[0],lat=p.coord[1];
       var arrMin=startMin+(p.km/spd)*60;
-      var arrH=Math.min(Math.floor(arrMin/60),23);
+      //var arrH=Math.min(Math.floor(arrMin/60),23);
+      var arrTotal=Math.round(arrMin);
+      var arrH=Math.floor(arrTotal/60)%24;
+      var arrM=arrTotal%60;
+      var arrStr=fmtTime(arrH,arrM);
       var arrM=arrMin%60;
       var name=i===0?geoSrc.name:(i===pts.length-1?geoDst.name:await revGeo(lat,lon));
       updateTacho(i+1,pts.length,name);
