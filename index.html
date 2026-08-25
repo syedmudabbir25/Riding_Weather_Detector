@@ -635,22 +635,23 @@ function showToast(msg,dur){
 // }
 // initCounter();
 
+//take 2
 async function initCounter(){
   try{
     var r=await fetch('https://hits.sh/syedmudabbir25.github.io/Riding_Weather_Detector.json');
-    if(!r.ok)throw new Error('fail');
+    if(!r.ok) throw new Error('fail');
     var d=await r.json();
-    if(d&&typeof d.hits==='number'){
+    if(d && typeof d.hits === 'number'){
       var el=document.getElementById('rideCount');
       var wrap=document.getElementById('hdrCounter');
-      if(el)el.textContent=d.hits.toLocaleString('en-IN');
-      if(wrap)wrap.style.display='flex';
+      if(el) el.textContent = d.hits.toLocaleString('en-IN');
+      if(wrap) wrap.style.display='flex';
     }
   }catch(e){
     var el=document.getElementById('rideCount');
     var wrap=document.getElementById('hdrCounter');
-    if(el)el.textContent='0';
-    if(wrap)wrap.style.display='flex';
+    if(el) el.textContent='0';
+    if(wrap) wrap.style.display='flex';
   }
 }
 initCounter();
