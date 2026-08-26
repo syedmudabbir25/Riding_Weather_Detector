@@ -635,23 +635,23 @@ function showToast(msg,dur){
 // }
 // initCounter();
 
-//take 2
+//take 3
 async function initCounter(){
+  var el = document.getElementById('rideCount');
+  var wrap = document.getElementById('hdrCounter');
   try{
-    var r=await fetch('https://hits.sh/syedmudabbir25.github.io/Riding_Weather_Detector.json');
+    var r = await fetch('https://countapi.mileshilliard.com/api/v1/hit/riding-weather-india-syedmudabbir25');
     if(!r.ok) throw new Error('fail');
-    var d=await r.json();
-    if(d && typeof d.hits === 'number'){
-      var el=document.getElementById('rideCount');
-      var wrap=document.getElementById('hdrCounter');
-      if(el) el.textContent = d.hits.toLocaleString('en-IN');
-      if(wrap) wrap.style.display='flex';
+    var d = await r.json();
+    if(d && typeof d.value === 'number'){
+      if(el) el.textContent = d.value.toLocaleString('en-IN');
+      if(wrap) wrap.style.display = 'flex';
+    } else {
+      throw new Error('bad payload');
     }
   }catch(e){
-    var el=document.getElementById('rideCount');
-    var wrap=document.getElementById('hdrCounter');
-    if(el) el.textContent='0';
-    if(wrap) wrap.style.display='flex';
+    if(el) el.textContent = '0';
+    if(wrap) wrap.style.display = 'flex';
   }
 }
 initCounter();
